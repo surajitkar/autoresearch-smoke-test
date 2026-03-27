@@ -8,7 +8,7 @@ on:
   check_suite:
     types: [completed]
 
-# Default: no contents:write â€” promotion job below overrides only when needed.
+# Default: no contents:write — promotion job below overrides only when needed.
 permissions:
   pull-requests: write
   contents: read
@@ -48,7 +48,7 @@ jobs:
           # Review context
           REVIEW_STATE:      ${{ github.event.review.state }}
 
-          # CI context â€” fires when check_suite completes
+          # CI context — fires when check_suite completes
           CHECK_SHA:         ${{ github.event.check_suite.head_sha }}
           CHECK_CONCLUSION:  ${{ github.event.check_suite.conclusion }}
           CHECK_PR_NUMBERS:  ${{ toJSON(github.event.check_suite.pull_requests) }}

@@ -19,7 +19,7 @@ What it does:
 Instructions load from instruction_source.program_file (variant sections) when
 use_program is true; otherwise from each variant's instruction_pack file.
 
-Same task ref always gets the same variant â€” no randomness.
+Same task ref always gets the same variant — no randomness.
 Works offline. No GitHub token needed.
 """
 
@@ -118,7 +118,7 @@ def main():
         if args.quiet:
             print("[autoresearch:unavailable]")
         else:
-            print("No experiment.yaml found â€” autoresearch not set up in this repo.")
+            print("No experiment.yaml found — autoresearch not set up in this repo.")
             print("Run from the repository root (or run: autoresearch-init).")
             print("Raise the PR normally without a tag.")
         sys.exit(0)
@@ -137,7 +137,7 @@ def main():
     tag = f"[autoresearch:task={args.task}:variant={variant['id']}]"
 
     out_file.write_text(
-        f"# Autoresearch â€” active instructions\n"
+        f"# Autoresearch — active instructions\n"
         f"# Variant : {variant['id']}\n"
         f"# Task    : {args.task}\n\n"
         f"{instructions}\n\n"
@@ -152,7 +152,7 @@ def main():
 
     width = 62
     print("=" * width)
-    print("  Autoresearch â€” variant assigned")
+    print("  Autoresearch — variant assigned")
     print("=" * width)
     print(f"  Task        : {args.task}")
     print(f"  Hash key    : {task_key}")
@@ -161,7 +161,7 @@ def main():
     print()
     print(f"  Instructions written to: {out_file}")
     print()
-    print("  REQUIRED â€” include this tag in your PR body:")
+    print("  REQUIRED — include this tag in your PR body:")
     print(f"  {tag}")
     print()
     print("-" * width)

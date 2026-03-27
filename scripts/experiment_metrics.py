@@ -1,5 +1,5 @@
 """
-experiment_metrics.py â€” evaluation config normalization, guardrails, and safe formula eval.
+experiment_metrics.py — evaluation config normalization, guardrails, and safe formula eval.
 Used by autoresearch.evaluate_experiment().
 """
 
@@ -82,9 +82,9 @@ def report_metric_section(decision: dict, experiment: dict) -> list[str]:
         if bs is None and cs is None:
             continue
         tag = " *(primary)*" if name == primary else ""
-        b_s = f"{bs:.4f}" if bs is not None else "â€”"
-        c_s = f"{cs:.4f}" if cs is not None else "â€”"
-        lines.append(f"- `{name}`{tag}: baseline {b_s} â†’ challenger {c_s}")
+        b_s = f"{bs:.4f}" if bs is not None else "—"
+        c_s = f"{cs:.4f}" if cs is not None else "—"
+        lines.append(f"- `{name}`{tag}: baseline {b_s} → challenger {c_s}")
     return lines if len(lines) > 1 else []
 
 

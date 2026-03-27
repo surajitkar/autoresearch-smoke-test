@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-record_metric.py â€” set an external metric on a PR run in autoresearch state.
+record_metric.py — set an external metric on a PR run in autoresearch state.
 
 Use when a metric is declared in experiment.yaml with source: external (e.g. revert_rate_7d).
 Requires the PR to exist in state (autoresearch has recorded an open/close cycle).
@@ -50,7 +50,7 @@ def main() -> None:
 
     key = str(args.pr)
     if key not in state.get("pr_runs", {}):
-        print(f"PR #{args.pr} not in state â€” autoresearch has no run for it yet.", file=sys.stderr)
+        print(f"PR #{args.pr} not in state — autoresearch has no run for it yet.", file=sys.stderr)
         sys.exit(1)
 
     state["pr_runs"][key][args.metric] = args.value

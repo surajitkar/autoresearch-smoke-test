@@ -8,7 +8,7 @@ For the step-by-step flow, **[AGENT.md](AGENT.md)** is the short source of truth
 
 1. From the **repo root**, run `python scripts/get_variant.py --task "<ticket-or-description>"` **before** writing code.
 2. Follow what it prints; it writes **`.repo-autoresearch/autoresearch_instructions.md`** (active slice from **`.repo-autoresearch/program.md`** variant sections, or fallback files under `variants/`).
-3. Put the printed **`[autoresearch:task=â€¦:variant=â€¦]`** tag at the end of the **PR body** (required for experiment tracking).
+3. Put the printed **`[autoresearch:task=…:variant=…]`** tag at the end of the **PR body** (required for experiment tracking).
 
 Copilot and Cursor load [`.github/copilot-instructions.md`](.github/copilot-instructions.md) and [`.cursor/rules/autoresearch.mdc`](.cursor/rules/autoresearch.mdc); those files **only reference** `AGENT.md` so the workflow is not duplicated.
 
@@ -16,7 +16,7 @@ Copilot and Cursor load [`.github/copilot-instructions.md`](.github/copilot-inst
 
 ## What This Project Does
 
-**Agent Prompt Autoresearch** is a multivariate testing framework for AI-generated pull requests. It determines which agent instruction packs reduce review churn on a specific codebase through controlled A/B experiments â€” baseline vs challenger variants, then measures review round trips and CI outcomes.
+**Agent Prompt Autoresearch** is a multivariate testing framework for AI-generated pull requests. It determines which agent instruction packs reduce review churn on a specific codebase through controlled A/B experiments — baseline vs challenger variants, then measures review round trips and CI outcomes.
 
 This repo is **not** [karpathy/autoresearch](https://github.com/karpathy/autoresearch) (LLM training). Same name pattern; different purpose (PR instruction experiments).
 
@@ -54,15 +54,15 @@ CLI entry points (after `pip install -e .`): `get-variant`, `autoresearch`, `rec
 
 ### Three-Script Core
 
-**`scripts/get_variant.py`** â€” Called by AI agents *before* writing code. Hashes the task reference, selects a variant deterministically, writes instructions to **`.repo-autoresearch/autoresearch_instructions.md`**, and emits a tracking tag. The same task always gets the same variant.
+**`scripts/get_variant.py`** — Called by AI agents *before* writing code. Hashes the task reference, selects a variant deterministically, writes instructions to **`.repo-autoresearch/autoresearch_instructions.md`**, and emits a tracking tag. The same task always gets the same variant.
 
-**`scripts/autoresearch.py`** â€” GitHub Actions engine triggered on PR open/update/close, review events, and `check_suite` completion. Reads the autoresearch tag from the PR body, posts an evidence block, and records outcomes (typically in a **GitHub Gist** when configured, else local state file).
+**`scripts/autoresearch.py`** — GitHub Actions engine triggered on PR open/update/close, review events, and `check_suite` completion. Reads the autoresearch tag from the PR body, posts an evidence block, and records outcomes (typically in a **GitHub Gist** when configured, else local state file).
 
-**`scripts/setup_test_repo.py`** â€” Two modes: `--simulate` creates fake PR data locally; `--repo X/Y` creates a real GitHub repo and opens test PRs.
+**`scripts/setup_test_repo.py`** — Two modes: `--simulate` creates fake PR data locally; `--repo X/Y` creates a real GitHub repo and opens test PRs.
 
 ### Experiment Configuration
 
-**`.repo-autoresearch/experiment.yaml`** â€” Configure variants, metrics, `instruction_source` (default: sections in **`program.md`**), optional `compliance` and `ci_tracking`.
+**`.repo-autoresearch/experiment.yaml`** — Configure variants, metrics, `instruction_source` (default: sections in **`program.md`**), optional `compliance` and `ci_tracking`.
 
 Variant text: **`program.md`** (`<!-- VARIANT: id -->` sections) with **`variants/*.md`** as fallback when a section is missing. Promotion workflow: **`PROMOTION.md`**.
 
@@ -76,13 +76,13 @@ Outcomes are stored in configured backend (Gist JSON or local `state.json`). **`
 
 ### GitHub Actions Workflow
 
-**`.github/workflows/autoresearch.yml`** â€” triggers on PR events, reviews, and `check_suite: completed`. Requires secrets **`GIST_ID`** and **`GIST_TOKEN`** for Gist-backed state.
+**`.github/workflows/autoresearch.yml`** — triggers on PR events, reviews, and `check_suite: completed`. Requires secrets **`GIST_ID`** and **`GIST_TOKEN`** for Gist-backed state.
 
-The workflow uses **two jobs**: the main job has **`contents: read`** (evidence, state, comments). If **`promotion.auto_open_pr`** is enabled, a **second job** runs only when a PR **closes** (after the first job) with **`contents: write`** so it can open an optional promotion PRâ€”narrower permission than granting write on every event.
+The workflow uses **two jobs**: the main job has **`contents: read`** (evidence, state, comments). If **`promotion.auto_open_pr`** is enabled, a **second job** runs only when a PR **closes** (after the first job) with **`contents: write`** so it can open an optional promotion PR—narrower permission than granting write on every event.
 
 ### Key Design Constraints
 
-- **Hash the task ref, not PR number** â€” task ref exists before the agent writes code.
-- **Variant tag in PR body** â€” explicit link for attribution.
-- **Instructions path** â€” `.repo-autoresearch/autoresearch_instructions.md` at repo root.
-- **Python â‰¥3.10** (see `.python-version`).
+- **Hash the task ref, not PR number** — task ref exists before the agent writes code.
+- **Variant tag in PR body** — explicit link for attribution.
+- **Instructions path** — `.repo-autoresearch/autoresearch_instructions.md` at repo root.
+- **Python ≥3.10** (see `.python-version`).

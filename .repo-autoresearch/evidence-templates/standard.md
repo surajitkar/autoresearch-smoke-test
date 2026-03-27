@@ -4,7 +4,7 @@ This file documents the fields that appear in the autoresearch
 evidence block posted on every eligible PR.
 
 The evidence block is generated automatically by autoresearch.py
-from GitHub API data â€” no manual input required.
+from GitHub API data — no manual input required.
 
 ## Fields included
 
@@ -13,7 +13,7 @@ from GitHub API data â€” no manual input required.
 | Variant | experiment.yaml + hash | Shows which instruction pack was active |
 | Task | PR body tag | Traces PR back to the originating ticket |
 | Intent | PR title | One-line summary of what the PR does |
-| Files changed | GitHub files API | Diff size â€” lines added and deleted |
+| Files changed | GitHub files API | Diff size — lines added and deleted |
 | Touched areas | Filename scan | Which files were modified |
 | Risk indicators | Filename keyword scan | Flags payment, auth, config, DB paths |
 | CI status | GitHub check runs API | Pass/fail on first full run |
@@ -24,11 +24,11 @@ from GitHub API data â€” no manual input required.
 
 The following filename patterns trigger risk flags:
 
-- **money/payment** â€” payment, checkout, billing, pricing, stripe, invoice
-- **auth/security** â€” auth, login, password, token, secret, oauth
-- **config/env** â€” .env, config, settings, secrets
-- **database** â€” migration, schema, sql, db, database
-- **API contract** â€” openapi, swagger, routes, api/v
+- **money/payment** — payment, checkout, billing, pricing, stripe, invoice
+- **auth/security** — auth, login, password, token, secret, oauth
+- **config/env** — .env, config, settings, secrets
+- **database** — migration, schema, sql, db, database
+- **API contract** — openapi, swagger, routes, api/v
 
 ## Adding fields
 

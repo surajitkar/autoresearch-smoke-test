@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate_autoresearch.py â€” automated validation checklist for autoresearch setup.
+validate_autoresearch.py — automated validation checklist for autoresearch setup.
 
 Default mode runs local validations:
   - scaffold copy check via autoresearch-init
@@ -295,7 +295,7 @@ def main() -> None:
     print("=" * 40)
     for r in results:
         icon = "PASS" if r["ok"] else "FAIL"
-        detail = f" â€” {r['detail']}" if r.get("detail") else ""
+        detail = f" — {r['detail']}" if r.get("detail") else ""
         print(f"[{icon}] {r['name']}{detail}")
 
     failed = [r for r in results if not r["ok"]]

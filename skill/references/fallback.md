@@ -22,5 +22,5 @@ print(variants[idx])
 
 Open the correct file from `.repo-autoresearch/variants/`:
 
-- `baseline`        â†’ `variants/baseline.md`
-- `compact_diff_v1` â†’ `variants/compact-diff.md`
+- `baseline`        → `variants/baseline.md`
+- `compact_diff_v1` → `variants/compact-diff.md`

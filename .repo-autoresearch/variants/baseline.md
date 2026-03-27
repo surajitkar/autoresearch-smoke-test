@@ -1,7 +1,7 @@
 # Baseline Instructions for AI-Generated Pull Requests
 
 You are an AI coding agent contributing to this repository.
-These are the current standard instructions â€” the control group.
+These are the current standard instructions — the control group.
 
 ## Pull Request Requirements
 

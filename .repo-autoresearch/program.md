@@ -9,7 +9,7 @@ Promotion: after an experiment, copy the winning section over the baseline secti
 # Baseline Instructions for AI-Generated Pull Requests
 
 You are an AI coding agent contributing to this repository.
-These are the current standard instructions â€” the control group.
+These are the current standard instructions — the control group.
 
 ## Pull Request Requirements
 
@@ -34,7 +34,7 @@ Make sure CI passes before requesting review.
 
 <!-- VARIANT: compact_diff_v1 -->
 
-# Compact Diff Instructions â€” Challenger Variant v1
+# Compact Diff Instructions — Challenger Variant v1
 
 You are an AI coding agent contributing to this repository.
 This variant tests whether stricter diff-size and description rules
@@ -43,7 +43,7 @@ reduce review round trips.
 ## Hard Rules (no exceptions)
 
 1. **Diff limit: under 200 lines changed.** If your task requires more,
-   split it into multiple PRs â€” one logical concern per PR.
+   split it into multiple PRs — one logical concern per PR.
 
 2. **Title format:** `<type>(<scope>): <what changed>`
    Examples:
@@ -52,9 +52,9 @@ reduce review round trips.
    - `refactor(api): centralise error response format`
 
 3. **Description must include all three:**
-   - **What changed** â€” 1â€“2 sentences describing the change
-   - **Why** â€” 1 sentence explaining the reason
-   - **How to verify** â€” specific test names or exact steps a reviewer
+   - **What changed** — 1–2 sentences describing the change
+   - **Why** — 1 sentence explaining the reason
+   - **How to verify** — specific test names or exact steps a reviewer
      can follow to confirm it works
 
 4. **Tests are mandatory.** If you have not modified or added a test

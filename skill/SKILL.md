@@ -3,7 +3,7 @@ name: autoresearch-pr
 description: >
   Use this skill whenever the user asks to raise a PR, open a pull request,
   implement a ticket, create a branch for any task, or write code that will
-  result in a PR â€” regardless of where the ticket lives (Jira, Linear,
+  result in a PR — regardless of where the ticket lives (Jira, Linear,
   GitHub Issues, verbal instruction, or no ticket at all). This skill MUST
   run before writing any code. It assigns the correct experiment variant via
   get_variant.py, loads the active instruction set, and ensures the PR body
@@ -14,17 +14,17 @@ description: >
   "make a PR for", "can you PR this", "write the code for PROJ-X",
   "create a branch and PR", "implement LIN-55", or any request implying
   a PR will be opened.
-compatibility: "Claude Code, GitHub Copilot â€” any agent that opens GitHub PRs"
+compatibility: "Claude Code, GitHub Copilot — any agent that opens GitHub PRs"
 ---
 
 # Autoresearch PR Skill
 
 Wraps the standard PR workflow with variant assignment at the front
-and a tracking tag at the end. **Canonical steps** live in **`AGENT.md`** at the repository root â€” follow that file to avoid drift; this skill expands with examples and edge cases.
+and a tracking tag at the end. **Canonical steps** live in **`AGENT.md`** at the repository root — follow that file to avoid drift; this skill expands with examples and edge cases.
 
-## Workflow â€” follow these steps in order
+## Workflow — follow these steps in order
 
-### Step 1 â€” Extract the task reference
+### Step 1 — Extract the task reference
 
 From the user's message, identify the best available identifier:
 
@@ -32,7 +32,7 @@ From the user's message, identify the best available identifier:
 2. GitHub issue number: `#89`
 3. Short description if no ref: `"add discount code to checkout"`
 
-### Step 2 â€” Run get_variant.py BEFORE writing any code
+### Step 2 — Run get_variant.py BEFORE writing any code
 
 ```bash
 python scripts/get_variant.py --task "<ref-or-description>"
@@ -53,18 +53,18 @@ Read the full output. It prints:
 
 If `get_variant.py` is not found, read `references/fallback.md`.
 
-### Step 3 â€” Read and follow the instructions
+### Step 3 — Read and follow the instructions
 
-Read `.repo-autoresearch/autoresearch_instructions.md` before writing any code (generated from `.repo-autoresearch/program.md` or variant files). Follow every rule in it â€” do not duplicate variant text here.
+Read `.repo-autoresearch/autoresearch_instructions.md` before writing any code (generated from `.repo-autoresearch/program.md` or variant files). Follow every rule in it — do not duplicate variant text here.
 
 If instructions conflict with an explicit user request, follow
 the user and note the deviation in the PR description.
 
-### Step 4 â€” Write the code
+### Step 4 — Write the code
 
 Implement the task following the variant instructions exactly.
 
-### Step 5 â€” Open the PR with the tracking tag
+### Step 5 — Open the PR with the tracking tag
 
 Include the tag printed by `get_variant.py` at the end of the PR body:
 
@@ -85,7 +85,7 @@ Closes #<issue-number-if-applicable>
 The tag is mandatory. Without it the PR cannot be attributed to
 the correct variant and the experiment data is lost.
 
-### Step 6 â€” Confirm to the user
+### Step 6 — Confirm to the user
 
 After opening the PR tell the user:
 - PR URL
@@ -106,13 +106,13 @@ Example:
 | No experiment.yaml | Raise PR normally, no tag needed |
 | get_variant.py not found | See `references/fallback.md` |
 | User overrides instructions | Follow user, note override in PR description |
-| No ticket ref at all | Use task description as hash key â€” still works |
+| No ticket ref at all | Use task description as hash key — still works |
 
 ---
 
 ## Files in this skill
 
-- `SKILL.md` â€” this file
-- `references/fallback.md` â€” manual variant assignment if script unavailable
+- `SKILL.md` — this file
+- `references/fallback.md` — manual variant assignment if script unavailable
 
 Repo root (not under `skill/`): `scripts/get_variant.py`, `AGENT.md`.
