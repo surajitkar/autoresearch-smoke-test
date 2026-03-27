@@ -37,17 +37,31 @@ import requests
 import yaml
 from pathlib import Path
 
-from scripts.experiment_metrics import (
-    evaluate_experiment,
-    primary_metric_label,
-    promotion_threshold_pct,
-    report_metric_section,
-)
-from scripts.get_variant import (
-    extract_variant_from_program,
-    load_variant_instructions,
-    merge_instruction_source,
-)
+try:
+    from scripts.experiment_metrics import (
+        evaluate_experiment,
+        primary_metric_label,
+        promotion_threshold_pct,
+        report_metric_section,
+    )
+    from scripts.get_variant import (
+        extract_variant_from_program,
+        load_variant_instructions,
+        merge_instruction_source,
+    )
+except ModuleNotFoundError:
+    # Supports direct execution via `python scripts/autoresearch.py` in CI.
+    from experiment_metrics import (
+        evaluate_experiment,
+        primary_metric_label,
+        promotion_threshold_pct,
+        report_metric_section,
+    )
+    from get_variant import (
+        extract_variant_from_program,
+        load_variant_instructions,
+        merge_instruction_source,
+    )
 
 # ---------------------------------------------------------------------------
 # Paths
