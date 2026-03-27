@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-prompt-autoresearch"
+version = "1.1.0"
+description = "Multivariate testing for AI-generated pull requests"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+get-variant         = "scripts.get_variant:main"
+autoresearch        = "scripts.autoresearch:main"
+setup-test-repo     = "scripts.setup_test_repo:main"
+autoresearch-init   = "agent_prompt_autoresearch.init_cli:main"
+draft-challenger    = "scripts.draft_challenger:main"
+record-metric       = "scripts.record_metric:main"
+validate-autoresearch = "scripts.validate_autoresearch:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scripts*", "agent_prompt_autoresearch*"]
+
+[tool.setuptools.package-data]
+agent_prompt_autoresearch = ["bundled/**/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

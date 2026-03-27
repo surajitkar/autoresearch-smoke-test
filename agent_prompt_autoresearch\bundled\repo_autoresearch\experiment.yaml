@@ -1,0 +1,68 @@
+# Agent Prompt Autoresearch â€” Experiment Configuration
+# -------------------------------------------------------
+# This is the only file you need to edit to run an experiment.
+# Everything else runs automatically.
+
+name: review-churn-reduction-v1
+
+instruction_source:
+  use_program: true
+  program_file: .repo-autoresearch/program.md
+
+state:
+  backend: auto
+
+evidence:
+  large_diff_additions: 300
+  thin_body_chars: 50
+
+cohort:
+  target_branches:
+    - main
+    - master
+
+ci_tracking:
+  include_name_substrings: []
+
+compliance:
+  pr_body_min_length: 50
+  checklist:
+    - id: tracking_tag
+      hint: "PR body should include the autoresearch tag from get_variant.py"
+    - id: describes_verification
+      hint: "Description should mention how to verify (tests, steps, or pytest)"
+
+metrics:
+  review_round_trips:
+    direction: lower_is_better
+  first_pass_ci_success:
+    direction: higher_is_better
+  time_to_merge_hours:
+    direction: lower_is_better
+  revert_rate_7d:
+    direction: lower_is_better
+    source: external
+
+evaluation:
+  metric: review_round_trips
+  min_improvement_pct: 15
+  min_prs: 20
+  guardrails:
+    - first_pass_ci_success >= baseline - 0.03
+    - revert_rate_7d <= baseline + 0.01
+
+evaluation_window:
+  type: pr_count
+  value: 20
+
+promotion:
+  auto_open_pr: false
+
+variants:
+  - id: baseline
+    instruction_pack: .repo-autoresearch/variants/baseline.md
+    evidence_template: .repo-autoresearch/evidence-templates/standard.md
+
+  - id: compact_diff_v1
+    instruction_pack: .repo-autoresearch/variants/compact-diff.md
+    evidence_template: .repo-autoresearch/evidence-templates/standard.md
